@@ -1,0 +1,47 @@
+if(!settings.multipleView) settings.batchView=false;
+settings.tex="pdflatex";
+defaultfilename="Geo3-1";
+if(settings.render < 0) settings.render=4;
+settings.outformat="";
+settings.inlineimage=true;
+settings.embed=true;
+settings.toolbar=false;
+viewportmargin=(2,2);
+
+size(15cm);
+import olympiad;
+pair P = origin;
+pair A = (0, -2);
+pair B = (-4, -5);
+pair C = (3, -4);
+pair D, E, F, X, Y, Z;
+D = 6 * A;
+E = 1.5 * B;
+F = 2.2 * C;
+X = extension(B, C, E, F);
+Y = extension(C, A, F, D);
+Z = extension(A, B, D, E);
+
+draw(A -- B -- C -- cycle);
+draw(D -- E -- F -- cycle);
+draw(P -- D, dashed);
+draw(P -- E, dashed);
+draw(P -- F, dashed);
+draw(X -- Y, blue);
+draw(B -- X, dashed + red);
+draw(C -- Y, dashed + red);
+draw(B -- Z, dashed + red);
+draw(E -- X, dashed + red);
+draw(F -- Y, dashed + red);
+draw(E -- Z, dashed + red);
+
+label("$P$", P, N);
+label("$A$", A, NW);
+label("$B$", B, S);
+label("$C$", C, S);
+label("$A'$", D, S);
+label("$B'$", E, S);
+label("$C'$", F, S);
+label("$X$", X, N);
+label("$Z$", Z, N);
+label("$Y$", Y, N);

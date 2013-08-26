@@ -1,0 +1,359 @@
+\documentclass[a4paper]{article}
+
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{listings}
+\usepackage[margin=1in]{geometry}
+\usepackage{parskip}
+\usepackage{xcolor}
+\usepackage{asymptote}
+\usepackage{fancyhdr}
+
+\pagestyle{fancyplain}
+
+\everymath{\displaystyle}
+
+% Set up the problem counter
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}[subsection]
+
+\begin{document}
+% Make our header
+\lhead{\today}
+\chead{Geometric Proofs}
+\rhead{incertia}
+
+\section{Ceva, Menalaus, Duality}
+\subsection{Ceva}
+
+\begin{problem}
+Let $ABC$ be a triangle and let $P$ be a point in its interior. Let $X_1, Y_1, Z_1$ be the intersections of $AP, BP, CP$, with $BC, CA, AB$. Let $X_2, Y_2, Z_2$, be the reflections of the points $X_1, Y_1, Z_1$ about the midpoints of $BC, CA, AB$. Prove that the lines $AX_2, BY_2, CZ_2$ are concurrent.
+\end{problem}
+
+\begin{proof}[Solution]
+This is trivial by Ceva because $\frac{CA_1}{A_1B} = \frac{BA_2}{A_2C}$.
+\end{proof}
+
+\begin{problem}
+Let $ABC$ be a triangle and let $P$ be a point in its interior. Let $X_1, Y_1, Z_1$ be the intersections of $AP, BP, CP$, with $BC, CA, AB$. Let the circumcircle of $X_1Y_1Z_1$ intersect segments $BC, CA, AB$ again at $X_3, Y_3, Z_3$. Prove that $AX_3, BY_3, CZ_3$ are concurrent.
+\end{problem}
+
+\begin{proof}[Solution]
+% By Power of a Point, we obtain the relations $\frac{BX_1}{Z_1B} = \frac{BZ_3}{X_3B}$, $\frac{CY_1}{X_1C} = \frac{CX_3}{Y_3C}$, and $\frac{AZ_1}{Y_1A} = \frac{AY_3}{Z_3A}$. Multiplying through, we have $1 = \frac{AZ_1}{Z_1B} \cdot \frac{BX_1}{X_1C} \cdot \frac{CY_1}{Y_1A} = \frac{AY_3}{Y_3C} \cdot \frac{CX_3}{X_3B} \cdot \frac{BZ_3}{Z_3A}$.
+This is trivial by Power of a Point and Ceva.
+\end{proof}
+
+\begin{problem}
+Let $ABC$ be a triangle and let $P$ be a point in its interior. Let $X_1, Y_1, Z_1$ be the intersections of $AP, BP, CP$, with $BC, CA, AB$. Let $X_2, Y_2, Z_2$, be the reflections of the points $X_1, Y_1, Z_1$ about the angle bisectors of $\angle CAB, \angle ABC, \angle BCA$. Prove that the lines $AX_2, BY_2, CZ_2$ are concurrent.
+\end{problem}
+
+\begin{proof}[Solution]
+This is trivial by Trig Ceva in a method similar to Problem 1.
+\end{proof}
+
+\textbf{Jacobi's Theorem.} Let $ABC$ be a triangle and let $X, Y, Z$ be points in its plane such that $\angle ZAB = \angle YAC$, $\angle ZBA = \angle XBC$, and $\angle XCB = \angle YCA$. Then the lines $AX, BY, CZ$ are concurrent.
+
+\begin{proof}
+Hooray for the creation of the Law of Sines. For the sake of clarity, let $\angle ZAB = \angle YAC = \alpha$, $\angle ZBA = \angle XBC = \beta$, $\angle XCB = \angle YCA = \gamma$. We know that
+\[ \frac{AZ}{\sin \angle ACZ} = \frac{CZ}{\sin \angle ZAC}. \]
+Rearranging, we obtain
+\[ \sin \angle ACZ = \frac{AZ \sin\left(\angle CAB + \alpha\right)}{CW}. \]
+Similarly, $\sin \angle ZCB = \frac{BZ \sin\left(\angle ABC + \beta\right)}{CZ}$. Thus
+\[ \frac{\sin \angle ACZ}{\sin \angle ZCB} = \frac{AZ \sin\left(\angle CAB + \alpha\right)}{BZ \sin\left(\angle ABC + \beta\right)}. \]
+We now apply Law of Sines again on $\triangle ABZ$ to compute $\frac{AZ}{BZ} = \frac{\sin \beta}{\sin \alpha}$. Hence
+\[ \frac{\sin \angle ACZ}{\sin \angle ZCB} = \frac{\sin\left(\beta\right) \sin\left(\angle CAB + \alpha\right)}{\sin\left(\alpha\right) \sin\left(\angle ABC + \beta\right)}. \]
+We are now done by Trig Ceva.
+\end{proof}
+
+\begin{proof}[Proof 2]
+Use the fact that $AX, BX, CX$ concur at $X$. The rest of the proof is left as an exercise to the reader.
+\end{proof}
+
+\begin{problem}
+Let $ABC$ be a triangle with incentre $I$. Let the tangency points of the incircle with $BC, CA, AB$ be $D, E, F$, respectively. Let $X, Y, Z$ be points on lines $ID, IE, IF$, respectively, such that $IX = IY = IZ$ and $X, Y, Z$ either all lie towards the interior of $ABC$ or towards the exterior. Prove that the lines $AX, BY, CZ$ are concurrent.
+\end{problem}
+
+\begin{proof}[Solution]
+$XD = ZF$ and $BD = BF$ so $\triangle BXD \cong \triangle BZF$ or $\angle BXD = \angle BZF$. We get similar relations for the other two pairs of angles so we are done by Jacobi.
+\end{proof}
+
+\textbf{Ceva for Convex Quadrilaterals.} If $ABCD$ is a convex quadrilateral, then 
+\[ \frac{\sin \angle DAC}{\sin \angle CAB} \cdot \frac{\sin \angle ABD}{\sin \angle DBC} \cdot \frac{\sin \angle BCA}{\sin \angle ACD} \cdot \frac{\sin \angle CDB}{\sin \angle BDA} = 1. \]
+
+\begin{proof}
+Let the diagonals $AC$ and $BD$ intersect at $P$. We have the relations
+\[ \frac{DP}{PB} = \frac{DA}{AB} \cdot \frac{\sin \angle DAC}{\sin \angle CAB}, \]
+\[ \frac{BP}{PD} = \frac{BC}{CD} \cdot \frac{\sin \angle BCA}{\sin \angle ACD}, \]
+\[ \frac{AP}{PC} = \frac{AB}{BC} \cdot \frac{\sin \angle ABD}{\sin \angle DBC}, \]
+\[ \frac{CP}{PA} = \frac{CD}{DA} \cdot \frac{\sin \angle CDB}{\sin \angle BDA} \]
+so we are done.
+\end{proof}
+
+\begin{problem}
+Let $ABCD$ be a convex quadrilateral with $\angle BAC = 30^{\circ}$, $\angle CAD = 20^{\circ}$, $\angle ABD = 50^{\circ}$, and $\angle DBC = 30^{\circ}$. If the diagonals intersect at $P$, prove that $PC = PD$.
+\end{problem}
+
+\begin{proof}[Solution]
+Let $\angle DCP = \alpha$ and $\angle CDP = \beta$. By applying Ceva for Quads, we obtain
+\[ \frac{\sin \beta}{\sin \alpha} \cdot \frac{\sin 20^{\circ} \cdot \sin 50^{\circ} \cdot \sin 70^{\circ}}{\sin 30^{\circ} \cdot \sin 30^{\circ} \cdot \sin 80^{\circ}} = 1. \]
+But $\sin 20^{\circ} \cdot \sin 50^{\circ} \cdot \sin 70^{\circ} = \sin 30^{\circ} \cdot \sin 30^{\circ} \cdot \sin 80^{\circ}$ (just apply product to sum) so $\sin \alpha = \sin \beta$. It is easily computable that $\angle CPD = 100^{\circ}$ so $\alpha, \beta \leq 90^{\circ}$. This implies that $\alpha = \beta$ so $PC = PD$.
+\end{proof}
+
+\begin{problem}
+Let $ABCD$ be a convex quadrilateral with $\angle DAC = \angle BDC = 36^{\circ}$, $\angle CBD = 18^{\circ}$, and $\angle BAC = 72^{\circ}$. The diagonals intersect at $P$. Compute $\angle APD$.
+\end{problem}
+
+\begin{proof}[Solution]
+Clearly $\angle BCD = 126^{\circ}$. We obtain three crucial equalities:
+\[ \angle BCD + \frac{1}{2} \angle BAD = 180^{\circ}, \]
+\[ \angle DAC = 2\angle DBC, \]
+\[ \angle BAC = 2\angle BDC \]
+This implies that the circle centered at $A$ with radius $AB$ passes through $C$ and $D$. It follows that $\angle ACB = 54^{\circ}$ and $\angle APD = \angle BPC = 180^{\circ} - \angle PCB - \angle PBC = 108^{\circ}$.
+\end{proof}
+
+\begin{proof}[Solution 2]
+Consider the regular $10$-gon $A_1A_2...A_{10}$.
+Let $A_1 = D$, $A_3 = A$, $A_5 = B$, and $A_5A_{10} \cap A_1A_7 = C$. We have now constructed $ABCD$ and this immediately implies that $AB = AC = AD$.
+\end{proof}
+
+\subsection{Menalaus}
+
+\begin{problem}
+Let $ABC$ be a triangle and $P$ be a point in its plane. Let $A_1, B_1, C_1$ be the intersections of $AP, BP, CP$ with $BC, CA, AB$, respectively. Consider Let $X = A_1B_1 \cap AB$, $Y = B_1C_1 \cap BC$, $Z = C_1A_1 \cap CA$. Prove that $X, Y, Z$ are collinear.
+\end{problem}
+
+\begin{proof}[Solution]
+This is trivial by Desargues' Theorem.
+\end{proof}
+
+\begin{problem}[The Lemoine line]
+Let $ABC$ be a triangle and let $A_1$ be the intersection point of the tangent at $A$ to the circumcircle of $ABC$ with line $BC$. Similarly, define $B_1$ and $C_1$. Prove that $A_1, B_1, C_1$ are collinear.
+\end{problem}
+
+\begin{proof}[Solution]
+This is trivial by Pascal on hexagon $AABBCC$.
+\end{proof}
+
+\begin{problem}[USAMO 2012 \#5]
+Let $ABC$ be a triangle and let $P$ be a point in its interior. Let $\gamma$ be a line passing through $P$. Let $A', B', C'$ be the points where the reflections of lines $PA, PB, PC$ with respect to $\gamma$ intersect lines $BC, CA, AB$, respectively. Prove that $A', B', C'$ are collinear. 
+\end{problem}
+
+\begin{proof}[Solution]
+We want that
+\[ \frac{BA'}{A'C} \cdot \frac{CB'}{B'A} \cdot \frac{AC'}{C'B} = 1. \]
+We can rewrite this as a ratio of areas
+\[ \frac{\left[BPA'\right]}{\left[A'PC\right]} \cdot \frac{\left[CPB'\right]}{\left[B'PA\right]} \cdot \frac{\left[ACP'\right]}{\left[C'PB\right]} = 1. \]
+We can relate this to a ratio of sines because $\left[ABC\right] = \frac{1}{2} \left(AB\right) \left(BC\right) \sin \angle C$.
+\[ \frac{\sin \angle BPA'}{\sin \angle A'PC} \cdot \frac{\sin \angle CPB'}{\sin \angle B'PA} \cdot \frac{\sin \angle APC'}{\sin \angle C'PB} = 1. \]
+Next, notice that $\angle BPA' = \angle B'PA$ or $\angle BPA' = 180^{\circ} - \angle B'PA$, depending on the configuration of the points. The same holds true for the other two pairs of angles, so we're done.
+\end{proof}
+
+\textbf{Menelaus' Theorem for Regular $n$-gons.} (one way only, though) Let $p$ be a line that intersects the sides $A_i A_{i + 1}$ of the $n$-gon $A_1 A_2 \dots A_n$ at the points $M_i$ for all $1 \leq i \leq n$. Then
+\[ \prod_{i = 1}^{n} \frac{A_i M_i}{M_i A_{i + 1}} = 1. \]
+
+\begin{proof}
+Consider a parallel projection of the points $A_i$ and $M_i$ in the direction of $p$ to a line $q$. Call the projections of $A_i$ $A_i'$. Clearly all the $M_i$ will project to a single point $M$. We then have
+\[ \prod_{i = 1}^{n} \frac{A_i M_i}{M_i A_{i + 1}} = \prod_{i = 1}^{n} \frac{A_i' M}{M A_{i + 1}} = 1. \]
+\end{proof}
+
+\textbf{Note:} There is a proof that uses induction. However, I am too lazy so that proof is left as an exercise to the reader.
+
+\begin{problem}[Van Aubel's Theorem]
+Let $ABC$ be a triangle and $P$ be a point in its interior. Let the lines $AP, BP, CP$ meet the sides $BC, CA, AB$ at $A', B', C'$, respectively. Prove that
+\[ \frac{AP}{PA'} = \frac{AC'}{C'B} + \frac{AB'}{B'C} \]
+\end{problem}
+
+\begin{proof}[Solution]
+We quickly obtain the relations
+\[ \frac{AP}{PA'} = \frac{AB}{BD} \cdot \frac{\sin \angle ABP}{\sin \angle PBA'} \]
+and
+\[ \frac{AB'}{B'C} = \frac{AB}{BC} \cdot \frac{\sin \angle ABB'}{\sin \angle B'BC'} \]
+which implies
+\[ \frac{AB'}{B'C} = \frac{BB'}{BC} \cdot \frac{AP}{PD}. \]
+Likewise
+\[ \frac{AC'}{C'B} = \frac{B'C}{BC} \cdot \frac{AP}{PD} \]
+and the result follows.
+\end{proof}
+
+\subsection{Duality}
+
+\textbf{Desargues' Theorem.} Two triangles $ABC$ and $A'B'C'$ are perspective from a point if and only if they are perspective from a line.
+
+\begin{center}
+\begin{asy}
+size(15cm);
+import olympiad;
+pair P = origin;
+pair A = (0, -2);
+pair B = (-4, -5);
+pair C = (3, -4);
+pair D, E, F, X, Y, Z;
+D = 6 * A;
+E = 1.5 * B;
+F = 2.2 * C;
+X = extension(B, C, E, F);
+Y = extension(C, A, F, D);
+Z = extension(A, B, D, E);
+
+draw(A -- B -- C -- cycle);
+draw(D -- E -- F -- cycle);
+draw(P -- D, dashed);
+draw(P -- E, dashed);
+draw(P -- F, dashed);
+draw(X -- Y, blue);
+draw(B -- X, dashed + red);
+draw(C -- Y, dashed + red);
+draw(B -- Z, dashed + red);
+draw(E -- X, dashed + red);
+draw(F -- Y, dashed + red);
+draw(E -- Z, dashed + red);
+
+label("$P$", P, N);
+label("$A$", A, NW);
+label("$B$", B, S);
+label("$C$", C, S);
+label("$A'$", D, S);
+label("$B'$", E, S);
+label("$C'$", F, S);
+label("$X$", X, N);
+label("$Z$", Z, N);
+label("$Y$", Y, N);
+\end{asy}
+\end{center}
+
+\begin{proof}
+First, we prove the ``only if'' part. Let $P$ be the center of perspectivity. Let $X, Y, Z$ be $BC \cap B'C', CA \cap C'A', AB \cap A'B'$, respectively. We apply Menelaus on $\triangle PBC$ with points $X, B', C'$ to obtain
+\[ \frac{PB'}{B'B} \cdot \frac{BX}{XC} \cdot \frac{CC'}{C'P} = 1. \]
+Similarly
+\[ \frac{PA'}{A'A} \cdot \frac{AY}{YC} \cdot \frac{CC'}{C'P} = 1 \]
+and
+\[ \frac{PB'}{B'B} \cdot \frac{BZ}{ZA} \cdot \frac{AA'}{A'P} = 1. \]
+Then,
+\[ \frac{\dfrac{PB'}{B'B} \cdot \dfrac{BX}{XC} \cdot \dfrac{CC'}{C'P}}{\left(\dfrac{PA'}{A'A} \cdot \dfrac{AY}{YC} \cdot \dfrac{CC'}{C'P}\right) \left(\dfrac{PB'}{B'B} \cdot \dfrac{BZ}{ZA} \cdot \dfrac{AA'}{A'P}\right)} = \frac{AZ}{ZB} \cdot \frac{BX}{XC} \cdot \frac{CY}{YA} = 1. \]
+
+Notice that Desargues' Theorem is self dual, which automatically implies that the converse is true. Anyways, here is a proof using the ``only if'' part of the theorem.
+
+Let $P = BB' \cap CC'$. Consider the two triangles $BB'Z$ and $CC'Y$. Notice how these two triangles are persective from $X$. This implies that $BB' \cap CC', B'Z \cap C'Y, ZB \cap YC$ are collinear. This implies $P, A, A'$ are collinear so $\triangle ABC$ and $\triangle A'B'C'$ are perspective from a point.
+\end{proof}
+
+\textbf{Pascal's Theorem.} Let $ABCDEF$ be a hexagon inscribed in a conic. Then $AB \cap DE, BC \cap EF, CD \cap FA$ are collinear.
+
+\begin{proof}
+It is sufficient to prove the theorem for when $ABCDEF$ is inscribed in a circle because there exists a projectivity that will take it to all other conics.
+
+\textbf{Lemma.} Let $\omega_1$ and $\omega_2$ be two circles intersecting at $M$ and $N$ and let $AB$ be a chord of $\omega_1$. Let $AM$ and $BN$ meet $\omega_2$ at points $C$ and $D$, respectively. Then $AB \parallel CD$.
+\begin{proof}
+We use directed angles mod $\pi$. We have $\angle CAB = 180^{\circ} - \angle MNB = \angle MND = 180^{\circ} - \angle ACD$ so $AB \parallel CD$.
+\end{proof}
+
+\begin{center}
+\begin{asy}
+import olympiad;
+size(15cm);
+pair A, B, C, D, E, F, P, Q, R, X, Y;
+path c_1, c_2;
+
+A = (1, 3);
+E = (-2, 1);
+B = (-1, -4);
+c_1 = circumcircle(A, E, B);
+D = relpoint(c_1, 0.7);
+F = relpoint(c_1, 0.89);
+C = relpoint(c_1, 0.07);
+
+P = extension(A, B, D, E);
+Q = extension(B, C, E, F);
+R = extension(C, D, F, A);
+c_2 = circumcircle(B, E, Q);
+
+X = intersectionpoints(c_2, A -- B)[0];
+Y = intersectionpoints(c_2, D -- E)[1];
+
+draw(P -- Q -- R, dashed + red);
+draw(A -- D, dashed);
+draw(X -- Y -- Q -- cycle, dashed);
+draw(A -- B -- C -- D -- E -- F -- cycle);
+draw(c_1);
+draw(c_2);
+
+label("$A$", A, N);
+label("$B$", B, SW);
+label("$C$", C, NE);
+label("$D$", D, S);
+label("$E$", E, NW);
+label("$F$", F, SE);
+label("$P$", P, SW);
+label("$Q$", Q, S);
+label("$R$", R, S);
+label("$X$", X, NE);
+label("$Y$", Y, S);
+\end{asy}
+\end{center}
+
+Let $\omega_1$ be the circumcircle of $ABCDEF$, $P = AB \cap DE, Q = BC \cap EF, R = CD \cap FA$, and $\omega_2$ be the circumcircle of $BEQ$. Let $X$ be the second intersection of $AB$ with $\omega_2$ and let $Y$ be the second intersection of $DE$ with $\omega_2$. By the lemma, we have $AR \parallel AE \parallel XQ$, $DR \parallel DC \parallel YQ$, and $AD \parallel XY$. This implies that there is a homothety between triangles $RAD$ and $QXY$. Hence, $AX$, $DY$, $RQ$ concur at $P$ which proves the collinearity of $P, Q, R$.
+\end{proof}
+
+\begin{problem}
+Let $ABC$ be a triangle and let $B_1, C_1$ be points on the sides $CA, AB$, respectively. Let $\Gamma$ be the incircle of $ABC$ and let $E, F$ be the tangency points of $\Gamma$ with the sides $CA, AB$, respectively. Furthermore, draw the tangents from $B_1$ and $C_1$ to gamma which are different from the sides of $ABC$ and take the tangency points with $\Gamma$ to be $Y$ and $Z$, respectively. Prove that the lines $B_1C_1, EF, YZ$ are concurrent.
+\end{problem}
+
+\begin{proof}[Solution]
+Let $P = EF \cap YZ$, $Q = EZ \cap FY$, $R = EY \cap FZ$. By Brokard's theorem, we have that $PQR$ is self-polar. $R$ lies on the polar $EY$ of $B_1$, so $B_1$ lies on the polar of $R$ (La Hire's Theorem). Similarly, $C_1$ lines on the polar of $R$, so $P, Q, B_1, C_1$ are collinear, as desired.
+\end{proof}
+
+\begin{proof}[Solution 2]
+Using the same notation as above, use Pascal on $EFFYZZ$ to obtain that $P, Q, C_1$ are collinear. Pascal on $FEEZYY$ yields $P, Q, B_1$ are collinear, so we are done.
+\end{proof}
+
+\subsection{Problems}
+
+\begin{problem}
+Let $ABCD$ be a trapezoid with $AD \parallel BC$. Let $P = AB \cap CD$ and $Q = AC \cap BD$. Let $M, N$ be the midpoints of $AD, BC$, respectively. Prove that $M, N, P, Q$ are collinear.
+\end{problem}
+
+\begin{proof}[Solution]
+$M$ and $N$ are the two homothetic centers that take $AD$ to $BC$.
+\end{proof}
+
+\begin{problem}
+Let $D$ be the foot of the altutide from $A$ of triangle $ABC$ and let $M, N$ be points on sides $CA, AB$ such that the lines $BM$ and $CN$ intersect on $AD$. Prove that $AD$ is the angle bisector of $\angle MDN$.
+\end{problem}
+
+\begin{proof}[Solution]
+Apply Ratio Lemma. We obtain $\frac{AM}{MC} \cdot \frac{CD}{DB} \cdot \frac{BN}{NA} = \frac{\sin \angle ADM}{\sin \angle ADN} \cdot \frac{\sin \angle NDB}{\sin \angle MDC} = 1$. This is equivalent to $\sin \angle ADM \cos \angle ADN = \sin \angle ADN \cos \angle ADM$, or $\sin \left(\angle ADM - \angle ADN\right) = 0$. We also have $\angle ADM, \angle ADN < \pi$, so this implies that $\angle ADM = \angle ADN$, as desired.
+\end{proof}
+
+\begin{problem}
+Prove the converse of the previous problem.
+\end{problem}
+
+\begin{proof}[Solution]
+It follows by reversing the steps of the previous proof.
+\end{proof}
+
+\begin{problem}
+Let $ABC$ be a triangle and let $A_1, B_1, C_1$ be points on lines $BC, CA, AB$, respectively. Denote by $G_A, G_B, G_C$ the centroids of triangles $AB_1C_1, BC_1A_1, CA_1B_1$, respectively. Prove that the lines $AG_A, BG_B, CG_C$ are concurrent if and only if lines $AA_1, BB_1, CC_1$ are concurrent.
+\end{problem}
+
+\begin{proof}[Solution]
+By the Ratio Lemma, we have
+\[ \left(\frac{AB_1}{AC_1} \cdot \frac{BC_1}{BA_1} \cdot \frac{CA_1}{CB_1}\right) \left(\frac{\sin \angle B_1AG_A}{\sin \angle G_AAC_1} \cdot \frac{\sin \angle C_1BG_B}{\sin \angle G_BBA_1} \cdot \frac{\sin \angle A_1CG_C}{\sin \angle G_CCB_1}\right) = 1 \]
+so $\frac{AB_1}{AC_1} \cdot \frac{BC_1}{BA_1} \cdot \frac{CA_1}{CB_1} = \frac{AC_1}{C_1B} \cdot \frac{BA_1}{A_1C} \cdot \frac{CB_1}{B_1A} = 1$ if and only if $\frac{\sin \angle B_1AG_A}{\sin \angle G_AAC_1} \cdot \frac{\sin \angle C_1BG_B}{\sin \angle G_BBA_1} \cdot \frac{\sin \angle A_1CG_C}{\sin \angle G_CCB_1} = 1$.
+\end{proof}
+
+\begin{problem}
+Let $ABC$ be a triangle and let $D, E, F$ be any three points on the  lines $BC, CA, AB$, respectively so that lines $AD, BE, CF$ are concurrent. Let the line parallel to $AB$ through $E$ intersect line $DF$ at $Q$ and let the line parallel through D intersect line $EF$ at $T$. Then, lines $CF, DE$, and $QT$ are concurrent.
+\end{problem}
+
+\begin{proof}[Solution]
+Let $FC \cap DT = X$ and $EF \cap BC = Y$. If $XD = XT$, we are done by Ceva on triangle $FDT$ because $\frac{FQ}{QD} = \frac{FE}{ET}$. However, we know that $(B, C; D, Y) = -1$ so the pencil $F(B, C; D, Y) = F(\infty, X, D, T) = -1$ so $X$ is the midpoint of $D$ and $T$.
+\end{proof}
+
+\begin{problem}
+Let $ABC$ be a triangle with $\angle A = \frac{\pi}{2}$, and let $D$ be a point lying on the side $AC$. Denote by $E$ the reflection of $A$ over line $BD$, and by $F$ the intersection point of $CE$ with the perpendicular from $D$ to $BC$. Prove that $AF, DE, BC$ are concurrent.
+\end{problem}
+
+\end{document}
